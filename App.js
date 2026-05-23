@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Vibration, Alert } from 'react-native';
 
 export default function App() {
@@ -15,9 +15,7 @@ export default function App() {
   };
 
   const handleChantDetected = () => {
-    // Light pulse for every single chant registered
     Vibration.vibrate(100);
-    
     const nextCount = count + 1;
     
     if (nextCount >= targetPerRound) {
@@ -27,13 +25,11 @@ export default function App() {
       if (nextRound > targetRounds) {
         setRound(targetRounds);
         addLog('🎉 Sadhana Complete! All 11 rounds finished.');
-        // Long continuous vibration sequence for finishing everything
         Vibration.vibrate([0, 500, 200, 500, 200, 1000]);
         Alert.alert('पूर्णाहूति', 'You have successfully completed 11 rounds of Radha Vallabh Shri Harivansh mahamantra.');
       } else {
         setRound(nextRound);
         addLog(`✨ Round ${round} Completed! Double-pulse pattern triggered.`);
-        // Distinct double-pulse vibration so you know the Mala changed without looking
         Vibration.vibrate([0, 400, 200, 400]);
       }
     } else {
@@ -62,8 +58,6 @@ export default function App() {
         <Text style={styles.roundText}>Round: {round} / {targetRounds}</Text>
       </View>
 
-      {/* Since browser-based speech loops require advanced configurations, 
-          this acts as the high-accuracy simulation engine button for your build */}
       <TouchableOpacity style={styles.micButton} onPress={handleChantDetected}>
         <Text style={styles.micButtonText}>🎙️ Simulate Voice Chant</Text>
       </TouchableOpacity>
@@ -148,7 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   resetButton: {
-    paddingPadding: 10,
+    padding: 10, // Fixed the typo here
     marginBottom: 20,
   },
   resetButtonText: {
